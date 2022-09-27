@@ -1,0 +1,224 @@
+.project-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	//align-items: flex-start;
+	//justify-content: space-around;
+	margin: 0 auto;
+}
+
+article {
+	margin: 1rem 1rem;
+	width: 220rem;
+	max-width: 100%;
+}
+
+article ul {
+	padding: 1.2rem;
+	max-height: 40rem;
+	height: 30rem;
+	overflow: scroll;
+}
+
+article > h2 {
+	color: white;
+	margin: 0;
+}
+
+// .RakBelumSelesaiBaca {
+// 	border: 0.24rem solid #20b2aa;
+// 	display: grid !important;
+// 	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+// 	gap: 16px;
+// 	margin-bottom: 48px;
+// 	padding: 1rem;
+// }
+
+.note-header {
+	background: #20b2aa;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.note-header h2 {
+	color: white;
+	margin: 0;
+}
+
+.note-header.archived {
+	background: #535353;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.note-list {
+	border: 0.24rem solid #20b2aa;
+	display: grid !important;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px;
+	margin-bottom: 48px;
+	padding: 1rem;
+
+	&__not-found {
+		color: #000;
+		font-weight: bold;
+		font-size: 2.2rem;
+	}
+}
+
+.note-list.archived {
+	border: 0.24rem solid #535353;
+	display: grid !important;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px;
+	margin-bottom: 48px;
+	padding: 1rem;
+}
+
+.note-item {
+	border-radius: 10px;
+	box-shadow: 0px 0px 3px 1px #000000 !important;
+	// padding: 1.4rem;
+	background: white;
+	height: 100%;
+	max-height: 300px;
+	min-height: 200px;
+
+	font-size: 1.3rem;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.note-body__content {
+	padding: 10px;
+	flex: 1;
+	overflow: scroll;
+
+	&--title {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		text-decoration: none;
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	&--date {
+		font-weight: 600;
+		&:after {
+			content: '';
+			display: block;
+			width: 100%;
+			border-bottom: 1px solid #000;
+		}
+	}
+
+	&--text {
+		margin-top: 1px;
+		white-space: pre-wrap;
+		text-overflow: ellipsis;
+	}
+}
+
+.note-body__action-wrapper {
+	display: flex;
+	// align-items: center;
+	margin-top: 2rem;
+	// justify-content: space-evenly;
+
+	button {
+		font: inherit;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.note-button__status-wrapper {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+	}
+}
+
+.note-button__action-delete,
+.note-button__action-archive,
+.note-button__action-archived {
+	display: block;
+	width: 100%;
+	// padding: 0.5rem 1.5rem;
+	padding: 8px 0;
+	cursor: pointer;
+}
+
+.note-button__action-delete {
+	color: white;
+	background-color: #ff0062;
+	// border: 1px solid #ff0062;
+	border: none;
+
+	&:hover,
+	&:active {
+		background: #a11c4f;
+		// border-color: #a11c4f;
+		font-weight: bold;
+		color: white;
+	}
+}
+
+.note-button__action-archive {
+	color: white;
+	background-color: #2e8b57;
+	// border: 1px solid #2e8b57;
+	border: none;
+
+	&:hover,
+	&:active {
+		background: #144b2b;
+		// border-color: #144b2b;
+		font-weight: bold;
+		color: white;
+	}
+}
+
+.note-button__action-archived {
+	color: white;
+	background-color: #535353;
+	// border: 1px solid #2e8b57;
+	border: none;
+
+	&:hover,
+	&:active {
+		background: #424242;
+		// border-color: #144b2b;
+		font-weight: bold;
+		color: white;
+	}
+}
+
+// button:focus {
+
+// }
+
+// button:hover,
+// button:active {
+// 	background: #a11c4f;
+// 	border-color: #a11c4f;
+// 	font-weight: bold;
+// 	color: white;
+// }
+
+// button.archive:hover,
+// button.archive:active {
+// 	background: #144b2b;
+// 	border-color: #144b2b;
+// 	font-weight: bold;
+// 	color: white;
+// }
