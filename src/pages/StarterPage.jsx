@@ -6,6 +6,7 @@ import SearchSection from '../components/SearchSection';
 import { getNotes, deleteNote, archiveNote } from '../utils/data';
 
 const StarterPage = () => {
+	const get_notes = getNotes();
 	const [notesList, setNotesList] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -30,12 +31,12 @@ const StarterPage = () => {
 
 	const deleteNoteHandler = (id) => {
 		deleteNote(id);
-		setNotesList(getNotes());
+		setNotesList(get_notes);
 	};
 
 	const ArchiveNoteHandler = (id) => {
 		archiveNote(id);
-		setNotesList(getNotes());
+		setNotesList(get_notes);
 	};
 
 	return (
