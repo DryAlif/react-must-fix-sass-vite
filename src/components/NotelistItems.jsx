@@ -45,11 +45,11 @@ const NotelistItems = ({
 };
 
 NotelistItems.propType = {
-	id: PropTypes.string,
-	title: PropTypes.string,
-	body: PropTypes.string,
-	archived: PropTypes.bool,
-	date: PropTypes.number,
+	id: PropTypes.number.isRequired,
+	title: PropTypes.string.isRequired,
+	body: PropTypes.string.isRequired,
+	archived: PropTypes.bool.isRequired,
+	date: PropTypes.number.isRequired,
 	deleteNoteHandler: PropTypes.func.isRequired,
 	ArchiveNoteHandler: PropTypes.func.isRequired,
 };

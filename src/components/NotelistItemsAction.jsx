@@ -1,9 +1,6 @@
 import React from 'react';
-import { BiArchiveIn } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 import { FaRegSave, FaRegFileArchive, FaRegTrashAlt } from 'react-icons/fa';
-import { RiDeleteBack2Line } from 'react-icons/ri';
-import { GrSave } from 'react-icons/gr';
-<BiArchiveIn />;
 
 const NotelistItemsAction = ({
 	id,
@@ -46,6 +43,13 @@ const NotelistItemsAction = ({
 			</button>
 		</div>
 	);
+};
+
+NotelistItemsAction.propTypes = {
+	id: PropTypes.number.isRequired,
+	archivedStatus: PropTypes.bool.isRequired,
+	deleteNoteHandler: PropTypes.func.isRequired,
+	ArchiveNoteHandler: PropTypes.func.isRequired,
 };
 
 export default NotelistItemsAction;
