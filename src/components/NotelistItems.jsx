@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { showFormattedDate } from '../utils/data';
 import NotelistItemsAction from './NotelistItemsAction';
 import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
 
 const decodeHtml = (html) => {
 	var txt = document.createElement('textarea');
@@ -41,6 +42,16 @@ const NotelistItems = ({
 			/>
 		</div>
 	);
+};
+
+NotelistItems.propType = {
+	id: PropTypes.string,
+	title: PropTypes.string,
+	body: PropTypes.string,
+	archived: PropTypes.bool,
+	date: PropTypes.number,
+	deleteNoteHandler: PropTypes.func.isRequired,
+	ArchiveNoteHandler: PropTypes.func.isRequired,
 };
 
 export default NotelistItems;
