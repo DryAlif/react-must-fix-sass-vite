@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 const InputSection = ({ createNoteHandler }) => {
 	const titleCharacterLimit = 50;
@@ -101,6 +102,10 @@ const InputSection = ({ createNoteHandler }) => {
 			</article>
 		</section>
 	);
+};
+
+InputSection.propTypes = {
+	createNoteHandler: PropTypes.func.isRequired,
 };
 
 export default InputSection;

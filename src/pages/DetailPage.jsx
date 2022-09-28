@@ -29,7 +29,6 @@ class DetailPage extends React.Component {
 					title={this.state.note.title}
 					created={this.state.note.createdAt}
 					body={this.state.note.body}
-					ArchiveStatus={this.state.note.archived}
 				/>
 			</section>
 		);

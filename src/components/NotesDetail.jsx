@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
 import { showFormattedDate } from '../utils/data';
 
-const NotesDetail = ({ title, created, body, ArchiveStatus }) => {
+const NotesDetail = ({ title, created, body }) => {
 	const navigate = useNavigate();
 	return (
 		<section className='project-input'>
@@ -70,7 +70,6 @@ NotesDetail.propTypes = {
 	title: PropTypes.string.isRequired,
 	created: PropTypes.string.isRequired,
 	body: PropTypes.string.isRequired,
-	ArchiveStatus: PropTypes.bool.isRequired,
 };
 
 export default NotesDetail;

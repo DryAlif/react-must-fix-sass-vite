@@ -57,7 +57,7 @@ const NotelistSection = ({ notes, deleteNoteHandler, ArchiveNoteHandler }) => {
 	);
 };
 
-NotelistSection.propType = {
+NotelistSection.propTypes = {
 	notes: PropTypes.array.isRequired,
 	deleteNoteHandler: PropTypes.func.isRequired,
 	ArchiveNoteHandler: PropTypes.func.isRequired,

@@ -25,7 +25,7 @@ const SearchSection = ({ searchKeyword, searchHandler }) => {
 	);
 };
 
-SearchSection.propType = {
+SearchSection.propTypes = {
 	searchKeyword: PropTypes.string.isRequired,
 	searchHandler: PropTypes.func.isRequired,
 };
