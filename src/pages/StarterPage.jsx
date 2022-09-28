@@ -6,16 +6,15 @@ import SearchSection from '../components/SearchSection';
 import { getNotes, deleteNote, archiveNote } from '../utils/data';
 
 const StarterPage = () => {
-	//const notes = getNotes();
 	const [notesList, setNotesList] = useState([]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const keyword = searchParams.get('keyword') || '';
 
-	function setSearchParamsHandler(keyword) {
+	const setSearchParamsHandler = (keyword) => {
 		setSearchParams({ keyword });
-	}
+	};
 
 	useEffect(() => {
 		if (!keyword) {
@@ -29,15 +28,15 @@ const StarterPage = () => {
 		}
 	}, [keyword]);
 
-	function deleteNoteHandler(id) {
+	const deleteNoteHandler = (id) => {
 		deleteNote(id);
 		setNotesList(getNotes());
-	}
+	};
 
-	function ArchiveNoteHandler(id) {
+	const ArchiveNoteHandler = (id) => {
 		archiveNote(id);
 		setNotesList(getNotes());
-	}
+	};
 
 	return (
 		<>
