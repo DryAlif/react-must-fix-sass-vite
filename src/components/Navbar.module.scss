@@ -1,10 +1,12 @@
+@use '../styles/abstracts/color' as *;
+@use '../styles/base/reset' as *;
 .app-nav-header {
 	// width: 100%;
 
 	// display: flex;
 
 	align-items: center;
-	background: var(--dark-color);
+	background: $dark-color;
 	// margin: 0 auto;
 
 	&--items {
@@ -16,7 +18,7 @@
 		margin: 0 auto;
 
 		&__logo {
-			color: var(--dark-orange-color);
+			color: $orange-500;
 			font-size: 2.5rem;
 			font-weight: bold;
 			margin-right: auto;
@@ -25,7 +27,7 @@
 		}
 
 		&__link {
-			color: var(--dark-orange-color);
+			color: $orange-500;
 			font-size: 1.8rem;
 			text-decoration: none;
 			margin-left: 40px;
@@ -39,16 +41,16 @@
 				border: none;
 				font-weight: bolder;
 				text-decoration: none;
-				color: var(--dark-orange-color);
-				background-color: var(--dark-color);
+				color: $orange-500;
+				background-color: $dark-color;
 				transition: all 0.2s;
 			}
 
 			button:hover {
-				background: #fff;
-				color: #333;
+				background: $white-100;
+				color: $dark-color;
 				cursor: pointer;
-				border: 1px solid #fff;
+				border: 1px solid $white-100;
 			}
 
 			.horizontalgap {
@@ -59,7 +61,7 @@
 			}
 
 			&-url {
-				color: var(--dark-orange-color);
+				color: $orange-500;
 
 				border-radius: 4px;
 				text-decoration: none;
@@ -79,10 +81,10 @@
 			}
 
 			&-url:hover {
-				background: #fff;
-				color: #333;
+				background: $white-100;
+				color: $dark-color;
 				cursor: pointer;
-				border: 1px solid #fff;
+				border: 1px solid $white-100;
 			}
 		}
 	}

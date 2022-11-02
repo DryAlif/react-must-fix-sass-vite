@@ -1,38 +1,79 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import NotesDetail from '../components/NotesDetail';
 import NotesNotFound from '../components/NotesNotFound';
-import { getNotesDetail } from '../utils/data';
+//import { getNotesDetail } from '../utils/data';
+import { getNote } from '../utils/api';
 
-const DetailPageWrapper = () => {
+//backdrop
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+	backdrop: {
+		zIndex: theme.zIndex.drawer + 1,
+		color: '#fff'
+	}
+}));
+
+const DetailPage = () => {
+	const [note, setNote] = useState({});
+	const [loading, setLoading] = useState(true);
 	const { id } = useParams();
-	return <DetailPage id={Number(id)} />;
-};
 
-class DetailPage extends React.Component {
-	constructor(props) {
-		super(props);
+	const navigate = useNavigate();
 
-		this.state = {
-			note: getNotesDetail(props.id),
-		};
+	//backdrop
+	const classes = useStyles();
+
+	const backButtonHandler = archived => {
+		if (archived === true) {
+			navigate('/archived');
+		} else {
+			navigate('/');
+		}
+	};
+
+	async function wait(ms) {
+		return new Promise(resolve => {
+			setTimeout(resolve, ms);
+		});
 	}
 
-	render() {
-		if (this.state.note == '' || this.state.note === null) {
-			return <NotesNotFound />;
-		}
+	useEffect(() => {
+		const getDetail = async id => {
+			await wait(350);
+			const { data } = await getNote(id);
+			setNote(data);
+			setLoading(false);
+			console.log('detailpage data', data.archived);
+		};
 
+		getDetail(id);
+	}, [id]);
+
+	// render() {
+	// 	console.log(this.state.note);
+	if (note === null) {
+		return <NotesNotFound />;
+	}
+
+	if (loading) {
 		return (
-			<section>
-				<NotesDetail
-					title={this.state.note.title}
-					created={this.state.note.createdAt}
-					body={this.state.note.body}
-				/>
-			</section>
+			<Backdrop className={classes.backdrop} open>
+				<CircularProgress color='inherit' />
+			</Backdrop>
 		);
 	}
-}
 
-export default DetailPageWrapper;
+	return (
+		<section>
+			<NotesDetail {...note} backButtonHandler={backButtonHandler} />
+		</section>
+	);
+	// }
+};
+
+export default DetailPage;

@@ -3,35 +3,67 @@ import NotelistItems from './NotelistItems';
 import PropTypes from 'prop-types';
 
 const NotelistSection = ({ notes, deleteNoteHandler, ArchiveNoteHandler }) => {
-	const notArchivedNotes = notes.filter((note) => !note.archived);
-	const archivedNotes = notes.filter((note) => note.archived);
+	// const notArchivedNotes = notes.filter((note) => !note.archived);
+	// const archivedNotes = notes.filter((note) => note.archived);
 
 	return (
-		<section className='project-list'>
-			<article className='saved-notes'>
-				<header className='note-header'>
-					<h2>Saved Notes</h2>
-				</header>
-				<div className='note-list'>
-					{notArchivedNotes.length > 0 ? (
-						notArchivedNotes.map((note) => {
-							return (
-								<NotelistItems
-									deleteNoteHandler={deleteNoteHandler}
-									ArchiveNoteHandler={ArchiveNoteHandler}
-									key={note.id}
-									date={note.createdAt}
-									{...note}
-								/>
-							);
-						})
-					) : (
-						<p className='note-list__not-found'>Tidak ada catatan</p>
-					)}
-				</div>
-			</article>
+		<>
+			{/* Contoh component ke1 */}
+			{/* <section className='project-list'>
+				<article className='saved-notes'>
+					<header className='note-header'>
+						<h2>Saved Notes</h2>
+					</header>
+					<div className='note-list'> */}
 
-			<article className='archived-notes'>
+			{notes.length > 0 ? (
+				notes.map((note) => {
+					return (
+						<NotelistItems
+							deleteNoteHandler={deleteNoteHandler}
+							ArchiveNoteHandler={ArchiveNoteHandler}
+							key={note.id}
+							date={note.createdAt}
+							{...note}
+						/>
+					);
+				})
+			) : (
+				<p className='note-list__not-found'>Tidak ada catatan</p>
+			)}
+
+			{/* </div>
+				</article>
+			</section> */}
+
+			{/* Contoh component ke2 */}
+
+			{/* <section className='project-list'>
+				<article className='saved-notes'>
+					<header className='note-header'>
+						<h2>Saved Notes</h2>
+					</header>
+					<div className='note-list'>
+						{notes.length > 0 ? (
+							notes.map((note) => {
+								return (
+									<NotelistItems
+										deleteNoteHandler={deleteNoteHandler}
+										ArchiveNoteHandler={ArchiveNoteHandler}
+										key={note.id}
+										date={note.createdAt}
+										{...note}
+									/>
+								);
+							})
+						) : (
+							<p className='note-list__not-found'>Tidak ada catatan</p>
+						)}
+					</div>
+				</article>
+			</section> */}
+
+			{/* <article className='archived-notes'>
 				<header className='note-header archived'>
 					<h2>Archived Note List</h2>
 				</header>
@@ -53,7 +85,8 @@ const NotelistSection = ({ notes, deleteNoteHandler, ArchiveNoteHandler }) => {
 					)}
 				</div>
 			</article>
-		</section>
+		</section> */}
+		</>
 	);
 };
 

@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useRef } from "react";
+import PropTypes from "prop-types";
 
 const InputSection = ({ createNoteHandler }) => {
 	const titleCharacterLimit = 50;
 
-	const [noteTitle, setNoteTitle] = useState('');
-	const [noteBodyTextArea, setNoteBodyTextArea] = useState('');
+	const [noteTitle, setNoteTitle] = useState("");
+	const [noteBodyTextArea, setNoteBodyTextArea] = useState("");
 
 	const contentref = useRef(null);
 
@@ -28,20 +28,20 @@ const InputSection = ({ createNoteHandler }) => {
 
 			const noteBodyTextArea = refValue;
 
-			createNoteHandler({ noteTitle, noteBodyTextArea });
-			setNoteTitle('');
+			createNoteHandler(noteTitle, noteBodyTextArea);
+			setNoteTitle("");
 		}
 	};
 
 	const paste = (e) => {
 		e.preventDefault();
-		const open = new RegExp('<', 'gi');
-		const close = new RegExp('>', 'gi');
+		const open = new RegExp("<", "gi");
+		const close = new RegExp(">", "gi");
 		const text = (e.originalEvent || e).clipboardData
-			.getData('text/plain')
-			.replace(open, '&lt')
-			.replace(close, '&gt');
-		document.execCommand('insertHTML', false, text);
+			.getData("text/plain")
+			.replace(open, "&lt")
+			.replace(close, "&gt");
+		document.execCommand("insertHTML", false, text);
 	};
 
 	return (
@@ -85,8 +85,7 @@ const InputSection = ({ createNoteHandler }) => {
 							data-placeholder='Input text ....'
 							contentEditable
 							suppressContentEditableWarning={true}
-							onPaste={(e) => paste(e)}
-						>
+							onPaste={(e) => paste(e)}>
 							{noteBodyTextArea}
 						</div>
 

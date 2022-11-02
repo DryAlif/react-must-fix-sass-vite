@@ -12,6 +12,26 @@
 	padding: 1.4rem;
 	text-align: center;
 
+	h2 {
+		color: black;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	p {
+		font-size: 1.5rem;
+
+		a.link-login {
+			font-size: 1.55rem;
+			color: black;
+
+			&:hover {
+				font-weight: bold;
+				color: rgb(64, 64, 243);
+			}
+		}
+	}
+
 	.hr-line {
 		border: none;
 		height: 0.2rem;

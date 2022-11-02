@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
 import { showFormattedDate } from '../utils/data';
 
-const NotesDetail = ({ title, created, body }) => {
+const NotesDetail = ({ title, createdAt, body, archived, backButtonHandler }) => {
 	const navigate = useNavigate();
 	return (
 		<section className='project-input'>
@@ -17,20 +17,10 @@ const NotesDetail = ({ title, created, body }) => {
 							<label className='form__label' htmlFor='inputBookTitle'>
 								Judul Catatan
 							</label>
-							<p className='note-input__title__char-limit'>
-								Created At: {showFormattedDate(created)}
-							</p>
+							<p className='note-input__title__char-limit'>Created At: {showFormattedDate(createdAt)}</p>
 						</div>
 
-						<input
-							id='inputBookTitle'
-							data-validation='Judul Buku'
-							type='text'
-							className='form__input'
-							placeholder='Ketik Judul Catatan'
-							value={title}
-							readOnly
-						/>
+						<input id='inputBookTitle' data-validation='Judul Buku' type='text' className='form__input' placeholder='Ketik Judul Catatan' value={title} readOnly />
 						<span className='form__error'></span>
 					</div>
 					<div className='form__item'>
@@ -39,10 +29,7 @@ const NotesDetail = ({ title, created, body }) => {
 								Catatan
 							</label>
 						</div>
-						<div
-							id='inputContentEditable'
-							className='form__input contentEditable'
-						>
+						<div id='inputContentEditable' className='form__input contentEditable'>
 							{parse(body)}
 						</div>
 
@@ -54,10 +41,9 @@ const NotesDetail = ({ title, created, body }) => {
 							type='button'
 							className='form__btn'
 							onClick={() => {
-								navigate(-1);
-							}}
-						>
-							Back To Note List
+								backButtonHandler(archived);
+							}}>
+							{archived === true ? 'Back To Archived List' : 'Back To Note List'}
 						</button>
 					</div>
 				</form>
@@ -67,9 +53,11 @@ const NotesDetail = ({ title, created, body }) => {
 };
 
 NotesDetail.propTypes = {
+	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
-	created: PropTypes.string.isRequired,
 	body: PropTypes.string.isRequired,
+	createdAt: PropTypes.string.isRequired,
+	archived: PropTypes.bool.isRequired
 };
 
 export default NotesDetail;

@@ -45,7 +45,7 @@ const NotelistItems = ({
 };
 
 NotelistItems.propType = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 	title: PropTypes.string.isRequired,
 	body: PropTypes.string.isRequired,
 	archived: PropTypes.bool.isRequired,

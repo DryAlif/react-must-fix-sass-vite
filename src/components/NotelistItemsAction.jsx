@@ -12,8 +12,7 @@ const NotelistItemsAction = ({
 		<div className='note-body__action-wrapper'>
 			<button
 				className='note-button__action-delete'
-				onClick={() => deleteNoteHandler(id)}
-			>
+				onClick={() => deleteNoteHandler(id)}>
 				<div className='note-button__status-wrapper'>
 					<FaRegTrashAlt />
 					<span>Delete</span>
@@ -25,8 +24,7 @@ const NotelistItemsAction = ({
 						? 'note-button__action-archive'
 						: 'note-button__action-archived'
 				}
-				onClick={() => ArchiveNoteHandler(id)}
-			>
+				onClick={() => ArchiveNoteHandler(id)}>
 				<div className='note-button__status-wrapper'>
 					{archivedStatus === false ? (
 						<>
@@ -46,7 +44,7 @@ const NotelistItemsAction = ({
 };
 
 NotelistItemsAction.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 	archivedStatus: PropTypes.bool.isRequired,
 	deleteNoteHandler: PropTypes.func.isRequired,
 	ArchiveNoteHandler: PropTypes.func.isRequired,

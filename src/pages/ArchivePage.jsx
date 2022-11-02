@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import NotelistSection from '../components/NotelistSection';
+import ArchivedNotelistSection from '../components/ArchivedNotelistSection';
+
 import SearchSection from '../components/SearchSection';
-// import { getNotes, archiveNote } from '../utils/data';
+// import { getNotes } from '../utils/data';
 
 //backdrop
 import Backdrop from '@material-ui/core/Backdrop';
@@ -11,12 +13,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-//Toast
-import { Toaster, toast } from 'react-hot-toast';
+// Api
+import { getArchivedNotes, deleteNote, unarchiveNote } from '../utils/api';
 
-//Api
-import { getActiveNotes, deleteNote, archiveNote } from '../utils/api';
-
+//Material UI backdrop set
 const useStyles = makeStyles(theme => ({
 	backdrop: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -24,13 +24,15 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const StarterPage = () => {
-	//backdrop
+const ArchivePage = () => {
+	//use backdrop
 	const classes = useStyles();
 
 	const [loading, setLoading] = useState(null);
 	const [notesList, setNotesList] = useState([]);
+
 	const [searchParams, setSearchParams] = useSearchParams();
+
 	const keyword = searchParams.get('keyword') || '';
 
 	const setSearchParamsHandler = keyword => {
@@ -48,7 +50,7 @@ const StarterPage = () => {
 	useEffect(() => {
 		const getNote = async () => {
 			await wait(350);
-			const { data } = await getActiveNotes();
+			const { data } = await getArchivedNotes();
 
 			setNotesList(data);
 			setLoading(data);
@@ -59,52 +61,46 @@ const StarterPage = () => {
 		// console.log(notesList);
 	}, []);
 
-	const notesFilter = notesList.filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()));
+	// useEffect(() => {
+	// 	if (!keyword) {
+	// 		setNotesList(getNotes());
+	// 	} else {
+	// 		setNotesList(getNotes().filter(note => note.title.toLowerCase().includes(keyword.toLowerCase())));
+	// 	}
+	// }, [keyword]);
 
-	const toggleArchiveNoteHandler = async id => {
-		await archiveNote(id);
-		navigate('/archived');
-	};
+	const notesFilter = notesList.filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()));
 
 	const deleteNoteHandler = async id => {
 		await deleteNote(id);
-		navigate(0);
+		navigate('/archived');
+	};
+
+	const toggleArchiveNoteHandler = async id => {
+		await unarchiveNote(id);
+		navigate('/');
+		// setNotesList(getNotes());
 	};
 
 	return (
 		<>
-			<Toaster position='top-right' reverseOrder={false} />
+			{/* 
+			<ArchivedNotelistSection notes={notesList} deleteNoteHandler={deleteNoteHandler} ArchiveNoteHandler={toggleArchiveNoteHandler} /> */}
 			<SearchSection searchKeyword={keyword} searchHandler={setSearchParamsHandler} />
 
 			<section className='project-list'>
-				<article className='saved-notes'>
-					<header className='note-header'>
-						<h2>Saved Notes</h2>
+				<article className='archived-notes'>
+					<header className='note-header archived'>
+						<h2>Archived Note List</h2>
 					</header>
-					<div className='note-list'>
+					<div className='note-list archived'>
 						{loading ? (
-							<NotelistSection notes={notesFilter} deleteNoteHandler={deleteNoteHandler} ArchiveNoteHandler={toggleArchiveNoteHandler} />
+							<ArchivedNotelistSection notes={notesFilter} deleteNoteHandler={deleteNoteHandler} ArchiveNoteHandler={toggleArchiveNoteHandler} />
 						) : (
 							<Backdrop className={classes.backdrop} open>
 								<CircularProgress color='inherit' />
 							</Backdrop>
 						)}
-
-						{/* {notes.length > 0 ? (
-							notes.map((note) => {
-								return (
-									<NotelistItems
-										deleteNoteHandler={deleteNoteHandler}
-										ArchiveNoteHandler={ArchiveNoteHandler}
-										key={note.id}
-										date={note.createdAt}
-										{...note}
-									/>
-								);
-							})
-						) : (
-							<p className='note-list__not-found'>Tidak ada catatan</p>
-						)} */}
 					</div>
 				</article>
 			</section>
@@ -112,4 +108,4 @@ const StarterPage = () => {
 	);
 };
 
-export default StarterPage;
+export default ArchivePage;

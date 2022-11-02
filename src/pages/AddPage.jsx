@@ -1,15 +1,18 @@
 import React from 'react';
-import { addNote } from '../utils/data';
+// import { addNote } from "../utils/data";
+// import { addNote } from "../utils/api";
+import { addNote } from '../utils/api';
+
 import { useNavigate } from 'react-router-dom';
 import InputSection from '../components/InputSection';
 
 const AddPage = () => {
 	const navigate = useNavigate();
 
-	const createNoteHandler = ({ noteTitle, noteBodyTextArea }) => {
-		addNote({ noteTitle, noteBodyTextArea });
+	async function createNoteHandler(noteTitle, noteBodyTextArea) {
+		await addNote({ title: noteTitle, body: noteBodyTextArea });
 		navigate('/');
-	};
+	}
 
 	return (
 		<>

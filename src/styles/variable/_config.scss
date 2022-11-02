@@ -23,6 +23,11 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
 
+[data-theme='dark'] {
+	--font-color: #eee;
+	--background-color: #333;
+}
+
 * {
 	margin: 0;
 	padding: 0;
