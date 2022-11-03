@@ -1,14 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+//Custom Hooks
+import { useLanguage } from '../hooks/useLanguage';
 
 const NotesNotFound = () => {
+	const { langSet } = useLanguage();
 	const navigate = useNavigate();
 
 	return (
 		<section className='project-input'>
 			<article className='input-section'>
 				<form className='form'>
-					<div className='form__title'>Notes Not Exist</div>
+					<div className='form__title'>{langSet === 'EN' ? 'Notes Not Exist' : 'Catatan Tidak Ada'}</div>
 					<hr className='hr-line' />
 					<div className='form__item'>
 						<button
@@ -16,9 +19,8 @@ const NotesNotFound = () => {
 							className='form__btn'
 							onClick={() => {
 								navigate('/');
-							}}
-						>
-							Return to Notes List
+							}}>
+							{langSet === 'EN' ? '	Return to Active Notes List' : 'Kembali Ke Halaman Catatan Aktif'}
 						</button>
 					</div>
 				</form>

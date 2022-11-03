@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import NotelistSection from '../components/NotelistSection';
 import SearchSection from '../components/SearchSection';
-// import { getNotes, archiveNote } from '../utils/data';
+//Custom Hooks
+import { useLanguage } from '../hooks/useLanguage';
+
+//Api
+import { archiveNote, deleteNote, getActiveNotes } from '../utils/api';
 
 //backdrop
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
-//Toast
-import { Toaster, toast } from 'react-hot-toast';
-
-//Api
-import { getActiveNotes, deleteNote, archiveNote } from '../utils/api';
 
 const useStyles = makeStyles(theme => ({
 	backdrop: {
@@ -25,10 +22,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const StarterPage = () => {
+	const { langSet } = useLanguage();
+
 	//backdrop
 	const classes = useStyles();
 
-	const [loading, setLoading] = useState(null);
+	const [loading, setLoading] = useState(true);
 	const [notesList, setNotesList] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const keyword = searchParams.get('keyword') || '';
@@ -51,12 +50,11 @@ const StarterPage = () => {
 			const { data } = await getActiveNotes();
 
 			setNotesList(data);
-			setLoading(data);
+			setLoading(false);
 			console.table(data);
 		};
 
 		getNote();
-		// console.log(notesList);
 	}, []);
 
 	const notesFilter = notesList.filter(note => note.title.toLowerCase().includes(keyword.toLowerCase()));
@@ -71,40 +69,25 @@ const StarterPage = () => {
 		navigate(0);
 	};
 
+	if (loading) {
+		return (
+			<Backdrop className={classes.backdrop} open>
+				<CircularProgress color='inherit' />
+			</Backdrop>
+		);
+	}
+
 	return (
 		<>
-			<Toaster position='top-right' reverseOrder={false} />
 			<SearchSection searchKeyword={keyword} searchHandler={setSearchParamsHandler} />
 
 			<section className='project-list'>
 				<article className='saved-notes'>
 					<header className='note-header'>
-						<h2>Saved Notes</h2>
+						<h2>{langSet === 'EN' ? 'Your Active Notes' : 'Catatan Aktif Kamu'}</h2>
 					</header>
 					<div className='note-list'>
-						{loading ? (
-							<NotelistSection notes={notesFilter} deleteNoteHandler={deleteNoteHandler} ArchiveNoteHandler={toggleArchiveNoteHandler} />
-						) : (
-							<Backdrop className={classes.backdrop} open>
-								<CircularProgress color='inherit' />
-							</Backdrop>
-						)}
-
-						{/* {notes.length > 0 ? (
-							notes.map((note) => {
-								return (
-									<NotelistItems
-										deleteNoteHandler={deleteNoteHandler}
-										ArchiveNoteHandler={ArchiveNoteHandler}
-										key={note.id}
-										date={note.createdAt}
-										{...note}
-									/>
-								);
-							})
-						) : (
-							<p className='note-list__not-found'>Tidak ada catatan</p>
-						)} */}
+						<NotelistSection notes={notesFilter} deleteNoteHandler={deleteNoteHandler} ArchiveNoteHandler={toggleArchiveNoteHandler} />
 					</div>
 				</article>
 			</section>

@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import autoBindReact from "auto-bind/react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
+import { LanguageContextConsumer } from '../context/LanguageContext';
 
 class RegisterInput extends React.Component {
 	constructor(props) {
@@ -8,16 +9,16 @@ class RegisterInput extends React.Component {
 		autoBindReact(this);
 
 		this.state = {
-			name: "",
-			email: "",
-			password: "",
+			name: '',
+			email: '',
+			password: ''
 		};
 	}
 
 	onNameChange(event) {
 		this.setState(() => {
 			return {
-				name: event.target.value,
+				name: event.target.value
 			};
 		});
 	}
@@ -25,7 +26,7 @@ class RegisterInput extends React.Component {
 	onEmailChange(event) {
 		this.setState(() => {
 			return {
-				email: event.target.value,
+				email: event.target.value
 			};
 		});
 	}
@@ -33,7 +34,7 @@ class RegisterInput extends React.Component {
 	onPasswordChange(event) {
 		this.setState(() => {
 			return {
-				password: event.target.value,
+				password: event.target.value
 			};
 		});
 	}
@@ -44,7 +45,7 @@ class RegisterInput extends React.Component {
 		this.props.register({
 			name: this.state.name,
 			email: this.state.email,
-			password: this.state.password,
+			password: this.state.password
 		});
 	}
 
@@ -52,38 +53,40 @@ class RegisterInput extends React.Component {
 		return (
 			<>
 				<form onSubmit={this.onSubmitHandler} className='form'>
-					<div className='form__title'>Register</div>
+					<div className='form__title'>
+						<LanguageContextConsumer>
+							{({ langSet }) => {
+								return <>{langSet === 'EN' ? 'Fill the form' : 'Isi Form '}</>;
+							}}
+						</LanguageContextConsumer>
+					</div>
 					<hr className='hr-line' />
 					<div className='form__item'>
 						<div className='new-notes-label'>
-							<label className='form__label' htmlFor='inputName'>
-								Name
+							<label className='form__label' htmlFor='inputNoteArea'>
+								<LanguageContextConsumer>
+									{({ langSet }) => {
+										return <>{langSet === 'EN' ? 'Name' : 'Nama'}</>;
+									}}
+								</LanguageContextConsumer>
 							</label>
 						</div>
+						<input type='text' className='form__input' placeholder='Ketik Nama' value={this.state.name} onChange={this.onNameChange} autoComplete='off' />
 
-						<input
-							type='text'
-							className='form__input'
-							placeholder='Ketik Nama'
-							value={this.state.name}
-							onChange={this.onNameChange}
-						/>
 						<span className='form__error'></span>
 					</div>
+
 					<div className='form__item'>
 						<div className='new-notes-label'>
 							<label className='form__label' htmlFor='inputNoteArea'>
-								Email
+								<LanguageContextConsumer>
+									{({ langSet }) => {
+										return <>{langSet === 'EN' ? 'Email Address' : 'Alamat Email'}</>;
+									}}
+								</LanguageContextConsumer>
 							</label>
 						</div>
-						<input
-							type='email'
-							className='form__input'
-							placeholder='Ketik Email'
-							value={this.state.email}
-							onChange={this.onEmailChange}
-							autoComplete='off'
-						/>
+						<input type='email' className='form__input' placeholder='Ketik Email' value={this.state.email} onChange={this.onEmailChange} autoComplete='off' />
 
 						<span className='form__error'></span>
 					</div>
@@ -94,21 +97,18 @@ class RegisterInput extends React.Component {
 								Password
 							</label>
 						</div>
-						<input
-							type='password'
-							className='form__input'
-							placeholder='Ketik Password'
-							autoComplete='current-password'
-							value={this.state.password}
-							onChange={this.onPasswordChange}
-						/>
+						<input type='password' className='form__input' placeholder='Ketik Password' autoComplete='current-password' value={this.state.password} onChange={this.onPasswordChange} />
 
 						<span className='form__error'></span>
 					</div>
 
 					<div className='form__item'>
 						<button type='submit' className='form__btn'>
-							Register
+							<LanguageContextConsumer>
+								{({ langSet }) => {
+									return <>{langSet === 'EN' ? 'Register Now' : 'Daftar Sekarang'}</>;
+								}}
+							</LanguageContextConsumer>
 						</button>
 					</div>
 				</form>
@@ -118,7 +118,7 @@ class RegisterInput extends React.Component {
 }
 
 RegisterInput.propTypes = {
-	register: PropTypes.func.isRequired,
+	register: PropTypes.func.isRequired
 };
 
 export default RegisterInput;

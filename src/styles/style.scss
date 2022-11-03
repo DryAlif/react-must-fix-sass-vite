@@ -1,1 +1,254 @@
 @use "./variable/" as *;
+
+.hiddenDiv {
+	visibility: hidden;
+	display: none;
+}
+
+[data-theme='dark'] {
+	.project-list {
+		background: $dark-700 !important;
+
+		.note-header {
+			background: $dark-700;
+			border: 0.1rem solid $white-100;
+		}
+
+		.note-list {
+			border: 0.1rem solid $white-100;
+		}
+		.note-list.archived {
+			border: 0.1rem solid $white-100;
+		}
+
+		.note-list__not-found {
+			color: $white-200;
+			font-weight: bold;
+			font-size: 2.2rem;
+		}
+
+		.note-item {
+			// white-space: nowrap;
+			// overflow: hidden;
+			overflow: hidden;
+			color: $white-200;
+			border-radius: 10px;
+			background: $dark-700 !important;
+
+			border: 3px solid $white-200;
+
+			.note-body__content {
+				color: $white-200;
+				background: $dark-700;
+
+				&:after {
+					content: '';
+					display: block;
+					width: 100%;
+					height: 100%;
+					background: $dark-700;
+				}
+
+				&--title {
+					text-overflow: ellipsis;
+					overflow: hidden;
+					white-space: nowrap;
+					text-decoration: none;
+
+					a {
+						text-decoration: none;
+						color: $white-200;
+
+						&:hover {
+							text-decoration: none;
+							font-weight: bold;
+							font-size: 2.2rem;
+						}
+					}
+				}
+
+				&--date {
+					font-weight: 600;
+					&:after {
+						content: '';
+						display: block;
+						width: 100%;
+						border-bottom: 1px solid $white-200;
+					}
+				}
+
+				&--text {
+					margin-top: 1px;
+					white-space: pre-wrap;
+					text-overflow: ellipsis;
+				}
+			}
+		}
+	}
+
+	.app-nav-header {
+		background: $dark-700 !important;
+		border-top: 1px solid $white-100;
+		border-bottom: 1px solid $white-100;
+
+		.app-nav-header--items {
+			.app-nav-header--items__logo {
+				color: $white-200;
+
+				&:hover {
+					color: $white-100;
+				}
+			}
+			.app-nav-header--items__link {
+				// color: $white-200;
+
+				button {
+					// font-size: 1.8rem;
+					// text-align: center;
+					// border: none;
+					// font-weight: bolder;
+					// text-decoration: none;
+					color: $white-200;
+					background-color: $dark-color;
+					transition: all 0.2s;
+				}
+
+				button:hover {
+					background: $white-100;
+					color: $dark-color;
+					cursor: pointer;
+					border: 1px solid $white-100;
+				}
+
+				&-url {
+					color: $white-200;
+
+					border-radius: 4px;
+					text-decoration: none;
+					margin-right: 3px;
+
+					text-decoration: none;
+					// background: wheat;
+					font-weight: bold;
+					display: flex;
+					align-items: center;
+					padding: 2px;
+					transition: all 0.2s;
+				}
+
+				&-url:last-child {
+					margin-left: 5px;
+				}
+
+				&-url:hover {
+					font-size: bold;
+					background: $white-100;
+					color: $black;
+					cursor: pointer;
+					border: 1px solid $white-100;
+				}
+			}
+		}
+	}
+
+	.project-search {
+		color: $white-200;
+		background: $dark-700 !important;
+
+		.input-search-section {
+			border: 1px solid $white-100;
+		}
+	}
+
+	.section-main {
+		background: $dark-700;
+
+		.project-input {
+			background: $dark-700;
+
+			.input-section {
+				border: 1px solid $white-200;
+
+				.form {
+					.form__title {
+						color: $white-200;
+					}
+					.form__item {
+						.new-notes-label {
+							color: $white-300;
+						}
+
+						.form__btn {
+							color: $white-300;
+							background: $dark-700;
+							border: 1px solid $white-200;
+
+							&:hover {
+								font-weight: bold;
+								background: $dark-900;
+								color: $white-100;
+								border: 2px solid $white-200;
+							}
+
+							&:active {
+								font-weight: bold;
+								background: $black;
+								color: $white-100;
+								border: 2px solid $white-200;
+							}
+						}
+					}
+				}
+
+				h2 {
+					color: $white-200;
+					font-weight: bold;
+					margin-bottom: 10px;
+				}
+
+				p {
+					font-size: 1.5rem;
+					color: $white-200;
+
+					a.link-login {
+						font-size: 1.55rem;
+						color: $white-200;
+
+						&:hover {
+							font-weight: bold;
+							color: rgb(64, 64, 243);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	body: {
+		background-color: $dark-700 !important;
+	}
+	// color: white;
+	// background-color: $black;
+	// main: {
+	// 	background: $black !important;
+	// }
+	// --background-color: $dark-color;
+}
+
+// [data-theme='light'] {
+// font-color: $whi
+// * {
+// color: $white-100;
+// background-color: $black;
+// }
+
+// body: {
+// 	background: $black !important;
+// }
+// color: white;
+// background-color: $black;
+// main: {
+// 	background: $black !important;
+// }
+// --background-color: $dark-color;
+// }

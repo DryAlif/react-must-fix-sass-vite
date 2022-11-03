@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
 import NotesDetail from '../components/NotesDetail';
 import NotesNotFound from '../components/NotesNotFound';
 //import { getNotesDetail } from '../utils/data';
-import { getNote } from '../utils/api';
+import {getNote} from '../utils/api';
 
 //backdrop
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	backdrop: {
@@ -48,14 +47,12 @@ const DetailPage = () => {
 			const { data } = await getNote(id);
 			setNote(data);
 			setLoading(false);
-			console.log('detailpage data', data.archived);
+			// console.log('detailpage data', data.archived);
 		};
 
 		getDetail(id);
 	}, [id]);
 
-	// render() {
-	// 	console.log(this.state.note);
 	if (note === null) {
 		return <NotesNotFound />;
 	}

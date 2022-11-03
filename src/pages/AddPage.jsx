@@ -1,9 +1,9 @@
 import React from 'react';
 // import { addNote } from "../utils/data";
 // import { addNote } from "../utils/api";
-import { addNote } from '../utils/api';
+import {addNote} from '../utils/api';
 
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import InputSection from '../components/InputSection';
 
 const AddPage = () => {

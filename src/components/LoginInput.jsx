@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import autoBindReact from "auto-bind/react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import autoBindReact from 'auto-bind/react';
+import { LanguageContextConsumer } from '../context/LanguageContext';
 
 class LoginInput extends React.Component {
 	constructor(props) {
@@ -8,15 +9,15 @@ class LoginInput extends React.Component {
 		autoBindReact(this);
 
 		this.state = {
-			email: "",
-			password: "",
+			email: '',
+			password: ''
 		};
 	}
 
 	onEmailChangeHandler(event) {
 		this.setState(() => {
 			return {
-				email: event.target.value,
+				email: event.target.value
 			};
 		});
 	}
@@ -24,7 +25,7 @@ class LoginInput extends React.Component {
 	onPasswordChangeHandler(event) {
 		this.setState(() => {
 			return {
-				password: event.target.value,
+				password: event.target.value
 			};
 		});
 	}
@@ -34,7 +35,7 @@ class LoginInput extends React.Component {
 
 		this.props.login({
 			email: this.state.email,
-			password: this.state.password,
+			password: this.state.password
 		});
 	}
 
@@ -44,18 +45,15 @@ class LoginInput extends React.Component {
 				<div className='form__item'>
 					<div className='new-notes-label'>
 						<label className='form__label' htmlFor='inputName'>
-							Email
+							<LanguageContextConsumer>
+								{({ langSet }) => {
+									return <>{langSet === 'EN' ? 'Email Address' : 'Alamat Email'}</>;
+								}}
+							</LanguageContextConsumer>
 						</label>
 					</div>
 
-					<input
-						type='email'
-						placeholder='Email'
-						className='form__input'
-						value={this.state.email}
-						onChange={this.onEmailChangeHandler}
-						autoComplete='off'
-					/>
+					<input type='email' placeholder='Email' className='form__input' value={this.state.email} onChange={this.onEmailChangeHandler} autoComplete='off' />
 					<span className='form__error'></span>
 				</div>
 				<div className='form__item'>
@@ -64,19 +62,18 @@ class LoginInput extends React.Component {
 							Password
 						</label>
 					</div>
-					<input
-						type='password'
-						placeholder='Password'
-						className='form__input'
-						value={this.state.password}
-						onChange={this.onPasswordChangeHandler}
-						autoComplete='current-password'
-					/>
+					<input type='password' placeholder='Password' className='form__input' value={this.state.password} onChange={this.onPasswordChangeHandler} autoComplete='current-password' />
 
 					<span className='form__error'></span>
 				</div>
 				<div className='form__item'>
-					<button className='form__btn'>Masuk</button>
+					<button className='form__btn'>
+						<LanguageContextConsumer>
+							{({ langSet }) => {
+								return <>{langSet === 'EN' ? 'Log in' : 'Masuk Sekarang'}</>;
+							}}
+						</LanguageContextConsumer>
+					</button>
 				</div>
 			</form>
 		);
@@ -84,7 +81,7 @@ class LoginInput extends React.Component {
 }
 
 LoginInput.propTypes = {
-	login: PropTypes.func.isRequired,
+	login: PropTypes.func.isRequired
 };
 
 export default LoginInput;

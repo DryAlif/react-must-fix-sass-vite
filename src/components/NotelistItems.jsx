@@ -5,23 +5,20 @@ import NotelistItemsAction from './NotelistItemsAction';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 
-const decodeHtml = (html) => {
+// Custom Hooks
+import { useLanguage } from '../hooks/useLanguage';
+
+const decodeHtml = html => {
 	var txt = document.createElement('textarea');
 	txt.innerHTML = html;
 	txt.remove();
 	return txt.value;
 };
 
-const NotelistItems = ({
-	title,
-	date,
-	body,
-	id,
-	archived,
-	deleteNoteHandler,
-	ArchiveNoteHandler,
-}) => {
+const NotelistItems = ({ title, date, body, id, archived, deleteNoteHandler, ArchiveNoteHandler }) => {
 	let newbodyhtml = decodeHtml(body);
+
+	const { langSet } = useLanguage();
 
 	return (
 		<div className='note-item'>
@@ -29,17 +26,16 @@ const NotelistItems = ({
 				<h3 className='note-body__content--title'>
 					<Link to={`/notes/${id}`}>{title}</Link>
 				</h3>
-				<p className='note-body__content--date'>{showFormattedDate(date)}</p>
+
+				<p className='note-body__content--date'>
+					{langSet === 'EN' ? 'Created: ' : 'Dibuat: '}
+					{langSet === 'EN' ? showFormattedDate(date, 'EN') : showFormattedDate(date, 'ID')}
+				</p>
 
 				<div className='note-body__content--text'>{parse(newbodyhtml)}</div>
 			</div>
 
-			<NotelistItemsAction
-				id={id}
-				deleteNoteHandler={deleteNoteHandler}
-				archivedStatus={archived}
-				ArchiveNoteHandler={ArchiveNoteHandler}
-			/>
+			<NotelistItemsAction id={id} deleteNoteHandler={deleteNoteHandler} archivedStatus={archived} ArchiveNoteHandler={ArchiveNoteHandler} />
 		</div>
 	);
 };
@@ -51,7 +47,7 @@ NotelistItems.propType = {
 	archived: PropTypes.bool.isRequired,
 	date: PropTypes.number.isRequired,
 	deleteNoteHandler: PropTypes.func.isRequired,
-	ArchiveNoteHandler: PropTypes.func.isRequired,
+	ArchiveNoteHandler: PropTypes.func.isRequired
 };
 
 export default NotelistItems;

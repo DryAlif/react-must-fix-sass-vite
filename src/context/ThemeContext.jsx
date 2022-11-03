@@ -1,8 +1,9 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 
 const ThemeContext = React.createContext();
 
 const ThemeContextProvider = ThemeContext.Provider;
+export const ThemeContextConsumer = ThemeContext.Consumer;
 
 const themeReducer = (state, action) => {
 	switch (action.type) {
@@ -20,6 +21,12 @@ export function ThemeProvider({ children }) {
 	useEffect(() => {
 		if (localStorage.getItem('theme')) {
 			setTheme(localStorage.getItem('theme'));
+			//<nav className={`${styles.nav} ${styles[theme]}`}>
+			if (theme === 'light') {
+				document.body.style.backgroundColor = `#f9f3f3`;
+			} else {
+				document.body.style.backgroundColor = `#1a1b1e`;
+			}
 		}
 	}, []);
 
